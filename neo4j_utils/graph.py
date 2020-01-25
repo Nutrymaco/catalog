@@ -16,7 +16,7 @@ class GraphEdge:
 
 
 class GraphDriver:
-    def __init__(self, uri='bolt://127.0.0.1', user='neo4j', password='test'):
+    def __init__(self, uri=f'bolt://127.0.0.1', user='neo4j', password='test'):
         self._driver = GraphDatabase.driver(uri=uri, auth=(user, password))
 
     def close(self):
@@ -84,6 +84,7 @@ class GraphDriver:
         result = tx.run(query)
         return result.records()
 
+
 g = GraphDriver()
 
 
@@ -103,8 +104,4 @@ def test():
 
 
 def test_write():
-    from syntax_analyzer import analyzer
-    parser = analyzer.Parser()
-    text = 'Да здравствует Единое Государство, да здравствуют нумера, да здравствует Благодетель!'
-    t = parser.parse(text)
-    t[0].display(show_printing=True)
+    ...

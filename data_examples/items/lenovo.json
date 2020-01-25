@@ -1,0 +1,12 @@
+{
+  "name": "Lenovo Yoga",
+  "vendor": "Lenovo",
+  "vendor_code": "lnvyga",
+  "category": "laptops",
+  "description": "nice and power",
+  "storage": 1028,
+  "storage dimension": "GB",
+  "os": "Windows",
+  "time capability": 5,
+  "time capability dimension": "hour"
+}

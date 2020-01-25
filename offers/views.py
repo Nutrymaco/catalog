@@ -20,21 +20,34 @@ def offers(request):
 
     if request.method == 'GET':
         if 'parameters' in request.GET:
-            get_elements_from_mongo('shop_offers', request.GET['parameters'])
+            offer_list = get_elements_from_mongo('offers', request.GET['parameters'])
         else:
-            get_elements_from_mongo('shop_offers')
-        return response
+            offer_list = get_elements_from_mongo('offers')
+        for offer in offer_list:
+            offer['item_id'] = str(offer['item_id'])
+        return Response(json=offer_list)
 
     if request.method == 'POST':
-        if 'item_id' not in request.POST:
+        if type(request.POST['parameters']) == str:
+            parameters = json.loads(request.POST['parameters'])
+        else:
+            parameters = request.POST['parameters']
+
+        if 'item_id' not in parameters:
             response.status_code = 400
-            response.text = 'Не передан параметр item_id'
+            response.json = {'error_text': 'item_id parameter not passed'}
             return response
-        shop_id = execute_sql(f"SELECT id FROM catalog_shop WHERE token = '{get_token_from_request(request)}';")[0]['id']
-        offer_parameters = request.POST['parameters']
-        offer_parameters['shop_id'] = shop_id
-        offer_insert(offer_parameters)
+        if 'price' not in parameters:
+            response.status_code = 400
+            response.json = {'error_text': 'price parameter not passed'}
+            return response
+
+        shop_id = execute_sql(f"SELECT id FROM catalog_shop WHERE access_token = '{get_token_from_request(request)}';")[0]['id']
+
+        parameters['shop_id'] = shop_id
+        offer_insert(parameters)
         return response
+
 
 @AccessDecorator(offer_parameters)
 def offer(request):
@@ -42,20 +55,22 @@ def offer(request):
     response = Response()
 
     if request.method == 'GET':
-        shop_offer = get_elements_from_mongo('shop_offers', document_ids=[ObjectId(shop_offer_id)], only_one=True)
-        response.text = shop_offer
+        shop_offer = get_elements_from_mongo('offers', document_ids=[ObjectId(offer_id)], only_one=True)
+        response.json = shop_offer
+        response.content_type = 'application/json'
         return response
 
     if request.method == 'PUT':
         parameters = request.json_body
-        offer = get_elements_from_mongo('offer', document_ids=[offer_id], only_one=True)
+        offer = get_elements_from_mongo('offers', document_ids=[offer_id], only_one=True)
         shop_id = offer['shop_id']
         token = get_token_from_request(request)
-        if get_rights(token) != 3 and not execute_sql(f"SELECT 1 FROM catalog_shop WHERE id={shop_id} and token='{token}';"):
+        if get_rights(token) != 3 and not has_rights('shop', shop_id, token):
             response.status_code = 403
             return response
         offer_update_in_mongo(offer_id, parameters)
         return response
 
     if request.method == 'DELETE':
-        offer_delete_from_elastic(offer_id)
+        offer_delete_from_mongo(offer_id)
+        return Response()

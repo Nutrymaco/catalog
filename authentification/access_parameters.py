@@ -27,3 +27,36 @@ offer_parameters = {
         'DELETE': (2, 3)
     }
 }
+
+recommended_items_parameters = {
+    'methods': {
+        'GET': (1,)
+    }
+}
+
+similar_items_parameters = {
+    'methods': {
+        'GET': 0
+    }
+}
+
+users_parameters = {
+    'methods': {
+        'GET': (1, )
+    }
+}
+
+user_parameters = {
+    'methods': {
+        'GET': 0,
+        'PUT': (1, ),
+        'DELETE': (1, 3)
+    }
+}
+
+user_actions_parameters = {
+    'methods': {
+        'GET': (1,),
+        'POST': (1,)
+    }
+}

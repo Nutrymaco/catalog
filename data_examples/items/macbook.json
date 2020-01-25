@@ -1,9 +1,12 @@
 {
-  "name": "Apple Macbook Air 128gB",
+  "name": "Apple MacBook Air 128gB",
   "vendor": "Apple",
+  "vendor_code": "mba2018",
   "category": "laptops",
   "description": "lightweight and power",
-  "storage": "128 Gb",
+  "storage": 128,
+  "storage dimension": "GB",
   "os": "Mac OS",
-  "time Capability": "12 hours"
+  "time capability": 12,
+  "time capability dimension": "hour"
 }

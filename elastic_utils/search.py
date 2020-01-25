@@ -28,7 +28,7 @@ def search_items_from_elastic(text, only_id=False):
     items = es.search(index='catalog', body=body)["hits"]["hits"]
 
     if only_id:
-        id_list = [item['_source']['id'] for item in items]
+        id_list = [item['_id'] for item in items]
         return id_list
     return items
 

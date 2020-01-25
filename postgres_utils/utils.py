@@ -1,7 +1,7 @@
 import psycopg2
 from settings import PG_HOST, PG_NAME
 
-connection = psycopg2.connect(dbname=PG_NAME, user='smykovefim', host=PG_HOST)
+connection = psycopg2.connect(dbname=PG_NAME, host=PG_HOST, user='postgres')
 connection.autocommit = True
 
 
@@ -26,7 +26,7 @@ def process_sql_injection(query):
 
 
 def get_query_for_insert(table_name, values, columns=None):
-    query = f'INSERT INTO {table_name} {get_sql_columns_string(columns)} VALUES {get_sql_values_string(values)};'
+    query = f'INSERT INTO {table_name} {get_sql_columns_string(columns)} VALUES ({get_sql_values_string(values)});'
     return query
 
 

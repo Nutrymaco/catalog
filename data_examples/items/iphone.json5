@@ -1,0 +1,10 @@
+{
+  "name": "Iphone X 64 Gb",
+  "vendor": "Apple",
+  "vendor_code": "iphx",
+  "category": "smartphones",
+  "description": "big display and small bounds",
+  "os": "IOS",
+  "time capability": 14,
+  "time capability dimension": "hour"
+}

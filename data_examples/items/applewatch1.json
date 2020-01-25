@@ -1,0 +1,10 @@
+{
+  "name": "Apple Watch 1",
+  "vendor": "Apple",
+  "vendor_code": "aw1",
+  "category": "smart watches",
+  "description": "mini and smart for you",
+  "os": "Watch OS",
+  "time capability": 3,
+  "time capability dimension": "day"
+}

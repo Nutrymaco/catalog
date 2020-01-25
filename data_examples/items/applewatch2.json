@@ -1,0 +1,10 @@
+{
+  "name": "Apple Watch 2",
+  "vendor": "Apple",
+  "vendor_code": "aw2",
+  "category": "smart watches",
+  "description": "mini and more smart for you",
+  "os": "Watch OS",
+  "time capability": 4,
+  "time capability dimension": "day"
+}

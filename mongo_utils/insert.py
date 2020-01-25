@@ -15,16 +15,11 @@ def item_insert(parameters):
 
 
 def offer_insert(parameters):
-    parameters['item_id'] = ObjectId(parameters['item_id'])
-    offer = offers_collection.insert_one(parameters)
-    offer_id = offer.inserted_id
     offer_item_id = parameters['item_id']
     offer_price = parameters['price']
-
-
+    print(parameters)
     change_item_price(items_collection, offer_item_id, offer_price)
-    del parameters['item_id']
-    items_collection.update_one({'_id': offer_item_id},
+    items_collection.update_one({'_id': ObjectId(offer_item_id)},
                                 {'$push': {
                                     'offers': parameters
                                 }})
@@ -88,7 +83,7 @@ if __name__ == "__main__":
     citilink1 = {
         "name": "Ipad 4 128 gb",
         "url": "https://mvideo.ru/electronics/laptops/macbook-air-2018-128gb",
-        "item_id": "5e15d8a87dcd01fcbf837fb1",
+        "item_id": "5e178d63ef34d4212f79f90f",
         "price": 450,
         "old_price": 450,
         "discount": False,

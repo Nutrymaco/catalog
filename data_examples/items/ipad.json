@@ -1,9 +1,11 @@
 {
-  "name": "Apple ipad 32gB",
+  "name": "Apple ipad 32GB",
   "vendor": "Apple",
   "category": "tablets",
   "description": "lightweight and smart",
-  "storage": "32 Gb",
+  "storage": 32,
+  "storage dimension": "Gb",
   "os": "IOS",
-  "time Capability": "14 hours"
+  "time capability": 14,
+  "time capability dimension": "hour"
 }

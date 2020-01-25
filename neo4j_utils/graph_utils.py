@@ -44,9 +44,11 @@ def get_string_params_from_dict(params: dict) -> str:
     string_params = '{'
     if params:
         for key in list(params)[:-1]:
-            string_params += str(key) + f': "{str(params[key])}",'
+            par = f'"{params[key]}"' if type(params[key]) == str else f'{str(params[key])}'
+            string_params += str(key) + f': {par},'
         last_key = list(params)[-1]
-        string_params += str(last_key) + f':"{str(params[last_key])}"'
+        par = f'"{params[last_key]}"' if type(params[last_key]) == str else f'{str(params[last_key])}'
+        string_params += str(last_key) + f':{par}'
     string_params += '}'
     return string_params
 

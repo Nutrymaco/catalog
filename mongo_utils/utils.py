@@ -2,7 +2,7 @@ from pymongo.collection import ObjectId
 
 
 def transform_to_mongo_language(parameters):
-    return {key: parameters[key] if type(parameters[key]) is not tuple else
+    return {key: parameters[key] if type(parameters[key]) is not list else
     {'$gte': parameters[key][0], '$lte': parameters[key][1]} for key in parameters}
 
 
